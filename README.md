@@ -61,7 +61,7 @@ try {
                 'ItemPrice' => '-2.00',
             ),
         ),
-    )));
+    ));
     
     // analyze transaction result ...
     
@@ -140,11 +140,11 @@ try {
 There are insonsitensies between Account Manager API documentation v1.1.08 and actual API behavior:
 
 1.  Not all return codes and messages are documented (e.g. "EMR-0099 Immediate email report has been sent successfully.").
-2.  Some methods return different success code from what could be assumed from documentation, e.g. account update
+2.  Some methods return different success code from what could be assumed from documentation, e.g. account card update
     action (AMA12) returns "RPA-0022 Update Account action completed successfully." though there is more specific
-    "RPA-0022 Update Account action completed successfully." defined in documentation.
+    "RPA-0025 Update Card action completed successfully." listed.
 3.  Summary actions do not support all filters specified in documentation.
-4.  Summary actions do not have required filetes, though documentation may list some as such.
+4.  Summary actions do not have required filters, though documentation may list some as such.
 5.  Register actions return generated ID if not specified explicitly except for "CTL01 Register template"
     which returns empty value for TemplateID though subsequent requests for details show that TemplateID was generated.
 6.  In charge template related actions, except for template item add (CTL11), trigger date must be specified with Trigger,
