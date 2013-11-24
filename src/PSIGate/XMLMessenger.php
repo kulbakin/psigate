@@ -59,15 +59,12 @@ class XMLMessenger extends Messenger
         $result = Helper::xmlToArray($this->_request($this->_url, Helper::arrayToXml($data, 'Order')->saveXML()));
         
         if ( ! isset($result['Result']) or ! isset($result['Result']['ReturnCode']) or ! isset($result['Result']['Approved'])) { // received response is not of expected format
-            throw new Exception('Unexpected response from gateway', 'XMLM-0001');
-        }
-        
-        if ('Y' != $result['Result']['ReturnCode']{0}) {
-            list($errCode, $errMsg) = explode(':', $result['Result']['ErrMsg'], 2);
-            throw new Exception($errMsg, $errCode);
+            throw new Exception('Unexpected response from gateway', 'PAPI-0002');
         }
         
         $result = $result['Result'];
+        $this->analyseTransactionResult($result);
+        
         if ( ! is_null($returnNode)) {
             if (isset($result[$returnNode])) {
                 $result = $result[$returnNode];

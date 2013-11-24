@@ -80,14 +80,14 @@ class AMMessenger extends Messenger
         $result = Helper::xmlToArray($this->_request($this->_url, Helper::arrayToXml($data, 'Request')->saveXML()));
         
         if ( ! isset($result['Response']) or ! isset($result['Response']['ReturnCode']) or ! isset($result['Response']['ReturnMessage'])) { // received response is not of expected format
-            throw new Exception('Unexpected response from gateway', 'AMME-0001');
-        }
-        
-        if ( ! is_null($successCode) and ! in_array($result['Response']['ReturnCode'], (array)$successCode)) {
-            throw new Exception($result['Response']['ReturnMessage'], $result['Response']['ReturnCode']);
+            throw new Exception('Unexpected response from gateway', 'PAPI-0002');
         }
         
         $result = $result['Response'];
+        if ( ! is_null($successCode) and ! in_array($result['ReturnCode'], (array)$successCode)) {
+            throw new Exception($result['ReturnMessage'], $result['ReturnCode']);
+        }
+        
         if ( ! is_null($returnNode)) {
             if (isset($result[$returnNode])) {
                 $result = $result[$returnNode];
@@ -414,6 +414,11 @@ class AMMessenger extends Messenger
     
     /**
      * Register a new charge
+     * 
+     * NOTE:
+     * If the function doesn't throw an exception, it doesn't mean
+     * the transaction is successful, since Invoice and Result elements
+     * returned by the function has their own ReturnCode and ErrMsg
      * 
      * XXX
      * Invoice result group contains charge id (RBCID) twice which

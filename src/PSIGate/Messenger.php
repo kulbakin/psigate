@@ -19,7 +19,7 @@ abstract class Messenger
     protected function _request($url, $data, $opts = array())
     {
         if ( ! extension_loaded('curl')) {
-            throw new Exception('The curl extension is required');
+            throw new Exception('The curl extension is required', 'PAPI-0001');
         }
         
         $ch = curl_init($url);
@@ -45,5 +45,26 @@ abstract class Messenger
         }
         
         return $result;
+    }
+    
+    /**
+     * Check result structure and throw exception if it corresponds to error
+     * 
+     * @param array $result
+     * @return bool
+     */
+    public function analyseTransactionResult($result)
+    {
+        if ('Y' != $result['ReturnCode']{0}) {
+            if ( ! empty($result['ErrMsg'])) {
+                list($errCode, $errMsg) = explode(':', $result['ErrMsg'], 2);
+            } else {
+                $errCode = 'PAPI-0003';
+                list(, $errMsg) = explode(':', $result['ReturnCode'], 2);
+            }
+            throw new Exception($errMsg, $errCode);
+        }
+        
+        return true;
     }
 }

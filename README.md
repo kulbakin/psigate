@@ -26,7 +26,12 @@ If an error occurs during request processing, an exception is thrown. Exception 
 PSIGate API error code (RPA-0002, RIV-0019 etc.) and exception message with corresponding error message, refer to PSIGate
 API documentation for the full list of error codes and associated messages.
 
-There are several PHP API specific errors related to unexpected response format (AMME-0001 and XMLM-0001) and cURL (CURL-0001, CURL-0006 etc).
+There are several PHP API specific errors related to unexpected response format, cURL and other situations, their exception codes are
+prefixed with PAPI and CURL (e.g. PAPI-0001, PAPI-0002, CURL-0001, CURL-0006 etc).
+
+Be aware that if exception is not thrown, it doesn't mean the operation was successful in general terms. E.g. *AMMessenger::chargeImmediate()*
+returns *Invoice* structure in result even though tranasaction is declined by processing gateway and credit card is not debited. There is
+*Messenger::analyseTransactionResult()* method which can be used for checking if data structure contains error information. 
 
 ## XML Messenger (XMLMessenger)
 
@@ -137,7 +142,7 @@ try {
 
 ### Known Issues (2013-11-21)
 
-There are insonsitensies between Account Manager API documentation v1.1.08 and actual API behavior:
+There are insonsitencies between Account Manager API documentation v1.1.08 and actual API behavior:
 
 1.  Not all return codes and messages are documented (e.g. "EMR-0099 Immediate email report has been sent successfully.").
 2.  Some methods return different success code from what could be assumed from documentation, e.g. account card update
