@@ -35,6 +35,8 @@ returns *Invoice* structure in result even though tranasaction is declined by pr
 
 ## XML Messenger (XMLMessenger)
 
+XML Messenger allows to process real-time credit card transactions.
+
 ### Basic usage
 
 ```php
@@ -76,6 +78,10 @@ try {
 ```
 
 ## Account Manager (AMMessenger)
+
+Account Manager Service allows to register customer payment accounts, store
+customer payment information for future recurring or real-time authorization,
+track customers’ recurring or real-time transaction activity in the form of invoices.
 
 ### Basic usage
 
