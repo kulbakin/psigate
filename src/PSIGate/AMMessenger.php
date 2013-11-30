@@ -326,7 +326,7 @@ class AMMessenger extends Messenger
      * Register a new charge
      * 
      * XXX
-     * When registering charge based on template, required field must be set
+     * When registering charge based on template, required fields must be set
      * explicitly even though already defined by it
      * 
      * @param array $charge
@@ -420,20 +420,27 @@ class AMMessenger extends Messenger
      * the transaction is successful, since Invoice and Result elements
      * returned by the function has their own ReturnCode and ErrMsg
      * 
-     * XXX
-     * Invoice result group contains charge id (RBCID) twice which
-     * makes return value having RBCID value inside Invoice as array
-     * having two same elements.
-     * 
      * @param array $charge
      * @return array
      */
     public function chargeImmediate($charge)
     {
         // RBC99 Charge(AccountID SerialNo StoreID ... ItemInfo+(...)) : Invoce(...) Result(...)
-        return $this->action('RBC99', array(
+        $result = $this->action('RBC99', array(
             'Charge' => $charge,
         ), 'PSI-0000', null);
+        
+        /*
+         * XXX
+         * Invoice result group contains charge id (RBCID) twice which
+         * makes return value having RBCID value inside Invoice as array
+         * having two same elements.
+         */
+        if ( is_array($result['Invoice']['RBCID'])) {
+            $result['Invoice']['RBCID'] = $result['Invoice']['RBCID'][0];
+        }
+        
+        return $result;
     }
     
     /**
