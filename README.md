@@ -15,7 +15,7 @@ The recommended way to install the library is through [Composer](https://getcomp
 ```json
 {
     "require": {
-        "propa/psigate": "*"
+        "propa/psigate": "dev-master"
     }
 }
 ```
