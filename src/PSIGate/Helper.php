@@ -3,24 +3,25 @@ namespace PSIGate;
 
 /**
  * Helper class which provides convenience methods
- *
+ * 
  * @author Pavel Kulbakin <p.kulbakin@gmail.com>
  */
 class Helper
 {
     /**
      * Convert XML to Array
-     *
+     * 
      * @param mixed $xml
      * @return array
      */
     public static function xmlToArray($xml)
     {
         if ( ! ($xml instanceof \DOMNode)) {
-            $xml = \DOMDocument::loadXML($xml);
-            if ( ! $xml) {
+            $doc = new \DOMDocument();
+            if ( ! $doc->loadXML($xml)) {
                  throw new \DOMException('Error parsing XML string');
             }
+            $xml = $doc;
         }
         
         $output = array();
@@ -35,7 +36,7 @@ class Helper
                 $v = self::xmlToArray($child);
                 if (isset($child->tagName)) {
                     $t = $child->tagName;
-
+                    
                     // assume multiple nodes with the same tag name
                     isset($output[$t]) or $output[$t] = array();
                     $output[$t][] = $v;
@@ -90,7 +91,7 @@ class Helper
     public static function arrayToXml($array, $node = 'root')
     {
         if ( ! ($node instanceof \DOMElement)) {
-            $xml = new \DomDocument('1.0', 'UTF-8');
+            $xml = new \DOMDocument('1.0', 'UTF-8');
             $xml->formatOutput = true;
             $node = $xml->appendChild($xml->createElement($node)); // create root element
         } else {
