@@ -164,7 +164,7 @@ is not much useful to calling script and usually can be ignored.
 ### Known Issues (2013-11-21)
 
 There are inconsitencies between Account Manager API documentation v1.1.08 and actual API behavior.
-Since PHP API is a simple intermediary interface, the source of the issues PSIGate server itself.
+Since PHP API is a simple intermediary interface, the source of the issues is PSIGate server itself.
 
 1.  Not all return codes and messages are documented (e.g. "EMR-0099 Immediate email report has been sent successfully.").
 2.  Some methods return different success code from what could be assumed from documentation, e.g. account card update
