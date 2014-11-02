@@ -26,7 +26,7 @@ abstract class Messenger
         // default timeout
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         // add POST fields
-        curl_setopt($ch, CURLOPT_POST, 1); 
+        curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         
         // XXX PSIGate gateways have SSLv1

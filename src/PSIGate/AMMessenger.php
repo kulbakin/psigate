@@ -42,10 +42,10 @@ class AMMessenger extends Messenger
      * @var arrray
      */
     protected $_id;
-
+    
     /**
      * Constructor
-     *
+     * 
      * @param string $host Gateway host with port
      * @param string $cid Client ID
      * @param string $userid User Id
@@ -436,7 +436,7 @@ class AMMessenger extends Messenger
          * makes return value having RBCID value inside Invoice as array
          * having two same elements.
          */
-        if ( is_array($result['Invoice']['RBCID'])) {
+        if (is_array($result['Invoice']['RBCID'])) {
             $result['Invoice']['RBCID'] = $result['Invoice']['RBCID'][0];
         }
         
