@@ -40,6 +40,7 @@ XML Messenger allows to process real-time credit card transactions.
 ### Basic usage
 
 ```php
+<?php
 $xmlm = new \PSIGate\XMLMessenger('dev.psigate.com:7989', 'teststore', 'psigate1234');
 try {
     $result = $xmlm->order(array(
@@ -86,6 +87,7 @@ track customers’ recurring or real-time transaction activity in the form of in
 ### Basic usage
 
 ```php
+<?php
 $amm = new \PSIGate\AMMessenger('dev.psigate.com:8645', '1000001', 'teststore', 'testpass');
 try {
     // register a new account
