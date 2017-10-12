@@ -53,7 +53,7 @@ class AMMessenger extends Messenger
      */
     public function __construct($host, $cid, $userid, $pass)
     {
-        $this->_url = 'https://'.$host.'/Messenger/AMMessenger';
+        $this->_url = 'https://' . $host;
         $this->_id = array(
             'CID'      => $cid,
             'UserID'   => $userid,
