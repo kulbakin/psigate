@@ -32,7 +32,7 @@ class XMLMessenger extends Messenger
      */
     public function __construct($host, $storeId, $pass)
     {
-        $this->_url = 'https://'.$host.'/Messenger/XMLMessenger';
+        $this->_url = 'https://' . $host;
         $this->_id = array(
             'StoreID'   => $storeId,
             'Passphrase' => $pass,
