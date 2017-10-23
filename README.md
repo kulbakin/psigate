@@ -2,6 +2,15 @@
 
 PHP implementation of PSIGate XML Messenger and Account Manager API.
 
+> __WARNING (2017-10-23)__
+>
+> Due to change in URL structure of API gateway, an incompatibility issue may arise when
+> update to the most recent `dev-master` version from prior to 2017-10-23 one.
+> Version history is introduced to address the issue (my mistake not to introduce it right away).
+> If you want to use old version, i.e. not to introduce changes in your current code, change `dev-master`
+> to `0.9` in your composer file. To avoid potential future compatibility, change `dev-master`
+> to the most relevant current release.
+ 
 ## General Information
 
 The library is a wrapper around [PSIGate XML API](http://psigate.com/pages/techsupport.asp) making input and result array structures reflect
@@ -15,7 +24,7 @@ The recommended way to install the library is through [Composer](https://getcomp
 ```json
 {
     "require": {
-        "propa/psigate": "dev-master"
+        "propa/psigate": "~1"
     }
 }
 ```
@@ -41,7 +50,7 @@ XML Messenger allows to process real-time credit card transactions.
 
 ```php
 <?php
-$xmlm = new \PSIGate\XMLMessenger('dev.psigate.com:7989', 'teststore', 'psigate1234');
+$xmlm = new \PSIGate\XMLMessenger('https://realtimestaging.psigate.com/xml', 'teststore', 'psigate1234');
 try {
     $result = $xmlm->order(array(
         'Subtotal' => '10.00',
@@ -88,7 +97,7 @@ track customers’ recurring or real-time transaction activity in the form of in
 
 ```php
 <?php
-$amm = new \PSIGate\AMMessenger('dev.psigate.com:8645', '1000001', 'teststore', 'testpass');
+$amm = new \PSIGate\AMMessenger('https://accountsstaging.psigate.com/xml', '1000001', 'teststore', 'testpass');
 try {
     // register a new account
     $accountResult = $amm->accountRegister(array(
