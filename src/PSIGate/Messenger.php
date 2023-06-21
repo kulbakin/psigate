@@ -55,7 +55,7 @@ abstract class Messenger
      */
     public function analyseTransactionResult($result)
     {
-        if ('Y' != $result['ReturnCode']{0}) {
+        if ('Y' != $result['ReturnCode'][0]) {
             if ( ! empty($result['ErrMsg'])) {
                 list($errCode, $errMsg) = explode(':', $result['ErrMsg'], 2);
             } else {
